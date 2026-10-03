@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kluisjes - Inloggen</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f8fafb;
+    color: #111;
+}
+
+/* Achtergrond */
+.page {
+    min-height: 100vh;
+    border: 2px solid #b7e1e8;
+    border-radius: 10px;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            ellipse 130px 230px at 104% 38%,
+            #3FA8BF 0 62%,
+            transparent 63%
+        ),
+        radial-gradient(
+            ellipse 145px 230px at 106% 65%,
+            #9AA63F 0 57%,
+            transparent 58%
+        ),
+        radial-gradient(
+            ellipse 135px 210px at -5% 82%,
+            #8C3074 0 54%,
+            transparent 55%
+        ),
+        #fbfcfc;
+}
+
+/* Navigatie */
+header {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    background: rgba(255,255,255,.92);
+    border-bottom: 1px solid #edf1f2;
+}
+
+.nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 20px;
+    font-weight: 800;
+    color: #111;
+
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 29px;
+    height: 31px;
+
+    position: relative;
+
+    border: 2px solid #111;
+    border-radius: 5px;
+    background: white;
+
+    box-shadow: -8px 5px 0 #8C3074;
+}
+
+.logo-icon::before {
+    content: "";
+
+    position: absolute;
+    left: 5px;
+    top: -5px;
+
+    width: 17px;
+    height: 8px;
+
+    background: #3FA8BF;
+
+    transform: skewX(-25deg);
+
+    border-radius: 2px;
+}
+
+.logo-icon::after {
+    content: "";
+
+    position: absolute;
+    right: 5px;
+    top: 11px;
+
+    width: 5px;
+    height: 7px;
+
+    border-radius: 4px;
+
+    background: #111;
+}
+
+/* Navigatie links */
+.navlinks {
+    display: flex;
+    gap: 22px;
+
+    margin-left: 26px;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.navlinks a {
+    color: #3FA8BF;
+    text-decoration: none;
+}
+
+.navlinks a:nth-child(3),
+.navlinks a:nth-child(4) {
+    color: #68757b;
+}
+
+/* Inloggen rechtsboven */
+.login {
+    margin-left: auto;
+
+    border: 0;
+    border-radius: 18px;
+
+    padding: 9px 19px;
+
+    background: #2db5c4;
+    color: white;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+/* Midden */
+.main {
+    min-height: calc(100vh - 72px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px 20px 45px;
+}
+
+/* Witte login kaart */
+.card {
+    width: 343px;
+    max-width: 100%;
+
+    background: rgba(255,255,255,.96);
+
+    border-radius: 13px;
+
+    padding: 28px 29px 24px;
+
+    box-shadow:
+        0 7px 25px rgba(20,35,40,.09);
+}
+
+/* Titel */
+.title {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.title h1 {
+    font-size: 22px;
+    margin: 0 0 6px;
+
+    font-weight: 800;
+}
+
+.title p {
+    margin: 0;
+
+    color: #707a80;
+
+    font-size: 12px;
+}
+
+/* Formulier */
+label {
+    display: block;
+
+    margin: 0 0 7px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    color: #6c777d;
+}
+
+.group {
+    margin-bottom: 14px;
+}
+
+.field {
+    width: 100%;
+    height: 37px;
+
+    border: 1px solid #dce3e6;
+    border-radius: 8px;
+
+    padding: 0 12px;
+
+    font-size: 11px;
+
+    outline: none;
+
+    background: white;
+}
+
+.field:focus {
+    border-color: #3FA8BF;
+
+    box-shadow:
+        0 0 0 2px rgba(63,168,191,.12);
+}
+
+/* Wachtwoord vergeten */
+.forgot {
+    display: block;
+
+    margin-top: -3px;
+
+    color: #3FA8BF;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* Paarse knop */
+.submit {
+    width: 100%;
+    height: 31px;
+
+    border: 0;
+    border-radius: 7px;
+
+    background: #a81978;
+    color: white;
+
+    font-weight: 700;
+    font-size: 11px;
+
+    margin-top: 18px;
+
+    cursor: pointer;
+}
+
+.submit:hover {
+    background: #8C3074;
+}
+
+/* Scheidingslijn */
+.divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #9aa1a5;
+
+    font-size: 9px;
+
+    margin: 17px 0 13px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+
+    height: 1px;
+
+    background: #e7ebed;
+
+    flex: 1;
+}
+
+/* Social login */
+.socials {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 11px;
+}
+
+.social {
+    width: 42px;
+    height: 34px;
+
+    border: 1px solid #e2e7e9;
+    border-radius: 7px;
+
+    background: white;
+
+    display: grid;
+    place-items: center;
+
+    font-weight: 800;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.google {
+    color: #4285f4;
+}
+
+.apple {
+    color: #111;
+}
+
+.microsoft {
+    color: #1677d2;
+    font-size: 15px;
+}
+
+/* Registreren */
+.register {
+    text-align: center;
+
+    margin: 17px 0 0;
+
+    font-size: 10px;
+
+    color: #7b858a;
+}
+
+.register a {
+    color: #3FA8BF;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+/* ========================= */
+/* 2FA SCHERM                 */
+/* ========================= */
+
+.twofa {
+    display: none;
+}
+
+.twofa.active {
+    display: block;
+}
+
+.login-form.hidden {
+    display: none;
+}
+
+.twofa-icon {
+    width: 48px;
+    height: 48px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: #f4eaf2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+}
+
+.twofa-title {
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    margin: 0 0 7px;
+}
+
+.twofa-text {
+    text-align: center;
+
+    color: #707a80;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    margin: 0 0 20px;
+}
+
+.code-input {
+    width: 100%;
+    height: 43px;
+
+    border: 1px solid #dce3e6;
+    border-radius: 8px;
+
+    text-align: center;
+
+    letter-spacing: 7px;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    outline: none;
+}
+
+.code-input:focus {
+    border-color: #3FA8BF;
+
+    box-shadow:
+        0 0 0 2px rgba(63,168,191,.12);
+}
+
+.twofa-button {
+    width: 100%;
+    height: 34px;
+
+    border: 0;
+    border-radius: 7px;
+
+    background: #a81978;
+    color: white;
+
+    font-weight: 700;
+    font-size: 11px;
+
+    margin-top: 15px;
+
+    cursor: pointer;
+}
+
+.twofa-button:hover {
+    background: #8C3074;
+}
+
+.back-login {
+    display: block;
+
+    text-align: center;
+
+    margin-top: 15px;
+
+    color: #3FA8BF;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* Mobiel */
+@media(max-width:650px) {
+
+    header {
+        padding: 0 13px;
+    }
+
+    .navlinks {
+        gap: 11px;
+        margin-left: 12px;
+    }
+
+    .navlinks a:nth-child(3),
+    .navlinks a:nth-child(4) {
+        display: none;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+
+    .login {
+        padding: 8px 14px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <!-- NAVIGATIE -->
+    <header>
+
+        <div class="nav">
+
+            <a class="logo" href="home.html">
+
+                <span class="logo-icon"></span>
+
+                <span>Kluisjes</span>
+
+            </a>
+
+
+            <nav class="navlinks">
+
+                <a href="home.html">
+                    Home
+                </a>
+
+                <a href="kluisjes.html">
+                    Kluisjes
+                </a>
+
+                <a href="home.html">
+                    Meldingen
+                </a>
+
+                <a href="home.html">
+                    Instellingen
+                </a>
+
+            </nav>
+
+
+            <a class="login" href="inloggen.html">
+                Inloggen
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- LOGIN -->
+    <main class="main">
+
+        <section class="card">
+
+
+            <!-- ========================= -->
+            <!-- NORMAAL INLOGGEN           -->
+            <!-- ========================= -->
+
+            <div id="loginForm" class="login-form">
+
+                <div class="title">
+
+                    <h1>
+                        Welkom terug!
+                    </h1>
+
+                    <p>
+                        Log in om verder te gaan.
+                    </p>
+
+                </div>
+
+
+                <form onsubmit="login(event)">
+
+                    <div class="group">
+
+                        <label for="email">
+                            E-mailadres
+                        </label>
+
+                        <input
+                            class="field"
+                            id="email"
+                            type="email"
+                            placeholder="voorbeeld@domein.nl"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="group">
+
+                        <label for="password">
+                            Wachtwoord
+                        </label>
+
+                        <input
+                            class="field"
+                            id="password"
+                            type="password"
+                            placeholder="Kies een wachtwoord"
+                            required
+                        >
+
+                    </div>
+
+
+                    <a
+                        class="forgot"
+                        href="#"
+                        onclick="forgotPassword(event)"
+                    >
+                        Wachtwoord vergeten?
+                    </a>
+
+
+                    <button
+                        class="submit"
+                        type="submit"
+                    >
+                        Inloggen
+                    </button>
+
+                </form>
+
+
+                <div class="divider">
+                    Of log in met
+                </div>
+
+
+                <div class="socials">
+
+                    <button
+                        type="button"
+                        class="social google"
+                        onclick="socialLogin('Google')"
+                    >
+                        G
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="social apple"
+                        onclick="socialLogin('Apple')"
+                    >
+                        ●
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="social microsoft"
+                        onclick="socialLogin('Microsoft')"
+                    >
+                        ▦
+                    </button>
+
+                </div>
+
+
+                <div class="register">
+
+                    Nog geen account?
+
+                    <a href="registratie.html">
+                        Maak er een aan
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- 2FA                       -->
+            <!-- ========================= -->
+
+            <div id="twofa" class="twofa">
+
+                <div class="twofa-icon">
+                    🔐
+                </div>
+
+                <h2 class="twofa-title">
+                    Extra verificatie
+                </h2>
+
+                <p class="twofa-text">
+                    Voer de 6-cijferige verificatiecode in
+                    om veilig verder te gaan.
+                </p>
+
+
+                <form onsubmit="verify2FA(event)">
+
+                    <div class="group">
+
+                        <label for="code">
+                            Verificatiecode
+                        </label>
+
+                        <input
+                            class="code-input"
+                            id="code"
+                            type="text"
+                            inputmode="numeric"
+                            maxlength="6"
+                            pattern="[0-9]{6}"
+                            placeholder="000000"
+                            autocomplete="one-time-code"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        class="twofa-button"
+                        type="submit"
+                    >
+                        Code controleren
+                    </button>
+
+                </form>
+
+
+                <a
+                    class="back-login"
+                    onclick="backToLogin()"
+                >
+                    ← Terug naar inloggen
+                </a>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/*
+    STAP 1:
+    Controleer e-mailadres + wachtwoord.
+
+    In dit prototype wordt na het klikken op
+    "Inloggen" de 2FA-pagina getoond.
+*/
+
+function login(event) {
+
+    event.preventDefault();
+
+    document.getElementById("loginForm").classList.add("hidden");
+
+    document.getElementById("twofa").classList.add("active");
+
+    document.getElementById("code").focus();
+
+}
+
+
+/*
+    STAP 2:
+    Controleer de 2FA-code.
+
+    Voor het prototype accepteren we iedere
+    6-cijferige code.
+
+    Daarna gaat de gebruiker naar home.html.
+*/
+
+function verify2FA(event) {
+
+    event.preventDefault();
+
+    const code = document.getElementById("code").value;
+
+    if (/^\d{6}$/.test(code)) {
+
+        window.location.href = "home.html";
+
+    } else {
+
+        alert(
+            "Voer een geldige 6-cijferige verificatiecode in."
+        );
+
+    }
+
+}
+
+
+/*
+    Terug naar het normale inlogscherm.
+*/
+
+function backToLogin() {
+
+    document.getElementById("twofa").classList.remove("active");
+
+    document.getElementById("loginForm").classList.remove("hidden");
+
+}
+
+
+/*
+    Wachtwoord vergeten.
+*/
+
+function forgotPassword(event) {
+
+    event.preventDefault();
+
+    alert(
+        "Een link om je wachtwoord opnieuw in te stellen zou hier worden verstuurd."
+    );
+
+}
+
+
+/*
+    Social login.
+*/
+
+function socialLogin(provider) {
+
+    alert(
+        "Inloggen met " + provider + " is gekoppeld aan deze knop."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
+```

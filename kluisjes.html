@@ -1,0 +1,2449 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kluisjes - Beheer</title>
+
+
+    <style>
+
+        /* =====================================
+           BASIS
+        ===================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f7f9fa;
+
+            color: #111820;
+        }
+
+
+        /* =====================================
+           PAGINA
+        ===================================== */
+
+        .page {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #f7f9fa 100%
+                );
+        }
+
+
+        /* =====================================
+           HEADER
+        ===================================== */
+
+        header {
+
+            height: 64px;
+
+            background: #ffffff;
+
+            border-bottom:
+                1px solid #e6ebed;
+
+            display: flex;
+
+            align-items: center;
+        }
+
+
+        .nav {
+
+            width:
+                min(
+                    1180px,
+                    calc(100% - 44px)
+                );
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+        }
+
+
+        /* =====================================
+           LOGO
+        ===================================== */
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #111;
+
+            text-decoration: none;
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+
+        .logo-icon {
+
+            width: 29px;
+
+            height: 31px;
+
+            position: relative;
+
+            border:
+                2px solid #111;
+
+            border-radius: 5px;
+
+            background: white;
+
+            box-shadow:
+                -7px 5px 0 #8C3074;
+        }
+
+
+        .logo-icon::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 5px;
+
+            top: -5px;
+
+            width: 17px;
+
+            height: 8px;
+
+            background: #3FA8BF;
+
+            transform:
+                skewX(-25deg);
+
+            border-radius: 2px;
+        }
+
+
+        .logo-icon::after {
+
+            content: "";
+
+            position: absolute;
+
+            right: 5px;
+
+            top: 11px;
+
+            width: 5px;
+
+            height: 7px;
+
+            border-radius: 4px;
+
+            background: #111;
+        }
+
+
+        /* =====================================
+           NAVIGATIE
+        ===================================== */
+
+        .navlinks {
+
+            display: flex;
+
+            gap: 25px;
+
+            margin-left: 40px;
+        }
+
+
+        .navlinks a {
+
+            position: relative;
+
+            color: #68757b;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            padding: 24px 0;
+        }
+
+
+        .navlinks a:hover {
+
+            color: #8C3074;
+        }
+
+
+        .navlinks a.active {
+
+            color: #8C3074;
+        }
+
+
+        .navlinks a.active::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            height: 3px;
+
+            background: #8C3074;
+
+            border-radius:
+                3px 3px 0 0;
+        }
+
+
+        /* =====================================
+           INLOGGEN
+        ===================================== */
+
+        .login-button {
+
+            margin-left: auto;
+
+            padding:
+                10px 21px;
+
+            border-radius: 20px;
+
+            background: #2db5c4;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .login-button:hover {
+
+            background: #3FA8BF;
+        }
+
+
+        /* =====================================
+           MAIN
+        ===================================== */
+
+        main {
+
+            width:
+                min(
+                    1180px,
+                    calc(100% - 44px)
+                );
+
+            margin: auto;
+
+            padding:
+                35px 0 55px;
+        }
+
+
+        /* =====================================
+           PAGINA TITEL
+        ===================================== */
+
+        .page-title {
+
+            margin-bottom: 24px;
+        }
+
+
+        .page-title h1 {
+
+            margin: 0 0 7px;
+
+            font-size: 29px;
+
+            letter-spacing:
+                -0.6px;
+        }
+
+
+        .page-title p {
+
+            margin: 0;
+
+            color: #657279;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================
+           STATISTIEKEN
+        ===================================== */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 14px;
+
+            margin-bottom: 23px;
+        }
+
+
+        .stat-card {
+
+            background: white;
+
+            border:
+                1px solid #e5eaec;
+
+            border-radius: 11px;
+
+            padding: 17px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(20,35,40,.035);
+        }
+
+
+        .stat-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .stat-name {
+
+            color: #69767c;
+
+            font-size: 10px;
+
+            font-weight: 700;
+        }
+
+
+        .stat-icon {
+
+            width: 30px;
+
+            height: 30px;
+
+            border-radius: 8px;
+
+            display: grid;
+
+            place-items: center;
+
+            color: white;
+
+            font-weight: 800;
+        }
+
+
+        .purple {
+            background: #8C3074;
+        }
+
+
+        .blue {
+            background: #3FA8BF;
+        }
+
+
+        .green {
+            background: #9AA63F;
+        }
+
+
+        .black {
+            background: #111820;
+        }
+
+
+        .stat-number {
+
+            margin-top: 12px;
+
+            font-size: 25px;
+
+            font-weight: 800;
+        }
+
+
+        .stat-info {
+
+            margin-top: 3px;
+
+            color: #899398;
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================
+           TABBLADEN
+        ===================================== */
+
+        .tabs {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-bottom: 16px;
+        }
+
+
+        .tab {
+
+            border: 1px solid #dfe6e8;
+
+            background: white;
+
+            color: #657279;
+
+            padding:
+                10px 22px;
+
+            border-radius: 8px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .tab.active {
+
+            background: #8C3074;
+
+            border-color: #8C3074;
+
+            color: white;
+        }
+
+
+        /* =====================================
+           BEHEER SECTIE
+        ===================================== */
+
+        .panel {
+
+            background: white;
+
+            border:
+                1px solid #e5eaec;
+
+            border-radius: 13px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(20,35,40,.04);
+
+            padding: 21px;
+        }
+
+
+        .panel-title {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 18px;
+        }
+
+
+        .panel-title h2 {
+
+            margin: 0;
+
+            font-size: 17px;
+        }
+
+
+        .panel-title p {
+
+            margin: 4px 0 0;
+
+            color: #7b878c;
+
+            font-size: 10px;
+        }
+
+
+        /* =====================================
+           BEHEER FUNCTIES
+        ===================================== */
+
+        .management-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 13px;
+        }
+
+
+        .management-card {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 16px;
+
+            background: #fafbfb;
+
+            border:
+                1px solid #e5eaec;
+
+            border-radius: 10px;
+
+            transition: .2s;
+        }
+
+
+        .management-card:hover {
+
+            border-color: #3FA8BF;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .management-icon {
+
+            width: 43px;
+
+            height: 43px;
+
+            flex-shrink: 0;
+
+            border-radius: 11px;
+
+            display: grid;
+
+            place-items: center;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+
+        .management-content {
+
+            flex: 1;
+        }
+
+
+        .management-content h3 {
+
+            margin: 0 0 4px;
+
+            font-size: 12px;
+        }
+
+
+        .management-content p {
+
+            margin: 0;
+
+            color: #78858a;
+
+            font-size: 9px;
+
+            line-height: 1.45;
+        }
+
+
+        .manage-button {
+
+            border: none;
+
+            background: #ffffff;
+
+            border:
+                1px solid #dce3e5;
+
+            color: #3d4b50;
+
+            border-radius: 7px;
+
+            padding:
+                8px 12px;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .manage-button:hover {
+
+            color: #8C3074;
+
+            border-color: #8C3074;
+        }
+
+
+        /* =====================================
+           GEGEVENS
+        ===================================== */
+
+        #gegevensPanel {
+
+            display: none;
+        }
+
+
+        /* =====================================
+           FILTERS
+        ===================================== */
+
+        .filters {
+
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr 1fr 1fr auto;
+
+            gap: 10px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .input,
+        .select {
+
+            height: 38px;
+
+            border:
+                1px solid #dfe6e8;
+
+            border-radius: 8px;
+
+            background: white;
+
+            padding:
+                0 11px;
+
+            font-size: 10px;
+
+            color: #45535a;
+
+            outline: none;
+        }
+
+
+        .input:focus,
+        .select:focus {
+
+            border-color: #3FA8BF;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(63,168,191,.10);
+        }
+
+
+        .search-button {
+
+            height: 38px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            padding:
+                0 20px;
+
+            background: #3FA8BF;
+
+            color: white;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .search-button:hover {
+
+            background: #258f9e;
+        }
+
+
+        /* =====================================
+           TABEL
+        ===================================== */
+
+        .table-wrapper {
+
+            overflow-x: auto;
+
+            border:
+                1px solid #e5eaec;
+
+            border-radius: 10px;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse:
+                collapse;
+
+            min-width: 720px;
+        }
+
+
+        th {
+
+            text-align: left;
+
+            padding:
+                12px 13px;
+
+            background: #f7f9fa;
+
+            color: #66747a;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            border-bottom:
+                1px solid #e5eaec;
+        }
+
+
+        td {
+
+            padding:
+                13px;
+
+            font-size: 10px;
+
+            border-bottom:
+                1px solid #edf0f1;
+
+            color: #344249;
+        }
+
+
+        tr:last-child td {
+
+            border-bottom: none;
+        }
+
+
+        tbody tr:hover {
+
+            background: #fbfcfc;
+        }
+
+
+        .student-name {
+
+            font-weight: 700;
+
+            color: #172128;
+        }
+
+
+        .k-number {
+
+            color: #8C3074;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================
+           NIVEAU BADGES
+        ===================================== */
+
+        .level {
+
+            display: inline-block;
+
+            padding:
+                5px 9px;
+
+            border-radius: 12px;
+
+            font-size: 8px;
+
+            font-weight: 800;
+        }
+
+
+        .level-vwo {
+
+            background:
+                #f0e3ed;
+
+            color:
+                #8C3074;
+        }
+
+
+        .level-havo {
+
+            background:
+                #e1f2f5;
+
+            color:
+                #237f8c;
+        }
+
+
+        .level-mavo {
+
+            background:
+                #edf1dc;
+
+            color:
+                #69752b;
+        }
+
+
+        /* =====================================
+           STATUS
+        ===================================== */
+
+        .status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            font-size: 8px;
+
+            font-weight: 700;
+        }
+
+
+        .status::before {
+
+            content: "";
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+        }
+
+
+        .available {
+
+            color: #728027;
+        }
+
+
+        .available::before {
+
+            background: #9AA63F;
+        }
+
+
+        .occupied {
+
+            color: #8C3074;
+        }
+
+
+        .occupied::before {
+
+            background: #8C3074;
+        }
+
+
+        .maintenance {
+
+            color: #bf8b1f;
+        }
+
+
+        .maintenance::before {
+
+            background: #d8a32d;
+        }
+
+
+        /* =====================================
+           ACTIEKNOP
+        ===================================== */
+
+        .small-action {
+
+            border: none;
+
+            background: #f1f5f6;
+
+            color: #4d5b61;
+
+            border-radius: 6px;
+
+            padding:
+                6px 9px;
+
+            font-size: 8px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .small-action:hover {
+
+            background: #8C3074;
+
+            color: white;
+        }
+
+
+        /* =====================================
+           GEEN RESULTATEN
+        ===================================== */
+
+        .no-results {
+
+            display: none;
+
+            padding: 25px;
+
+            text-align: center;
+
+            color: #7b878c;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================
+           FOOTER
+        ===================================== */
+
+        footer {
+
+            width:
+                min(
+                    1180px,
+                    calc(100% - 44px)
+                );
+
+            margin: auto;
+
+            padding:
+                15px 0 25px;
+
+            color: #899398;
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================
+           RESPONSIVE
+        ===================================== */
+
+        @media(max-width: 900px) {
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .filters {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+
+            .search-button {
+
+                width: 100%;
+            }
+        }
+
+
+        @media(max-width: 650px) {
+
+            .navlinks {
+
+                gap: 12px;
+
+                margin-left: 20px;
+            }
+
+
+            .navlinks a:nth-child(3),
+            .navlinks a:nth-child(4) {
+
+                display: none;
+            }
+
+
+            .management-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .stats {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .filters {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            main {
+
+                width:
+                    calc(100% - 28px);
+
+                padding-top: 25px;
+            }
+
+
+            .page-title h1 {
+
+                font-size: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =====================================
+         NAVIGATIE
+    ====================================== -->
+
+    <header>
+
+        <div class="nav">
+
+
+            <!-- LOGO -->
+
+            <a
+                class="logo"
+                href="home.html"
+            >
+
+                <span class="logo-icon"></span>
+
+                <span>
+                    Kluisjes
+                </span>
+
+            </a>
+
+
+            <!-- MENU -->
+
+            <nav class="navlinks">
+
+                <a href="home.html">
+                    Home
+                </a>
+
+
+                <a
+                    href="kluisjes.html"
+                    class="active"
+                >
+                    Kluisjes
+                </a>
+
+
+                <a href="meldingen.html">
+                    Meldingen
+                </a>
+
+
+                <a href="instellingen.html">
+                    Instellingen
+                </a>
+
+            </nav>
+
+
+            <!-- INLOGGEN -->
+
+            <a
+                class="login-button"
+                href="inloggen.html"
+            >
+                Inloggen
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================
+         MAIN
+    ====================================== -->
+
+    <main>
+
+
+        <!-- TITEL -->
+
+        <div class="page-title">
+
+            <h1>
+                Kluisjesbeheer
+            </h1>
+
+            <p>
+                Beheer kluisjes, leerlingen en reserveringen
+                van jouw school.
+            </p>
+
+        </div>
+
+
+
+        <!-- =====================================
+             STATISTIEKEN
+        ====================================== -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-name">
+                        Totaal kluisjes
+                    </span>
+
+                    <div class="stat-icon purple">
+                        ▣
+                    </div>
+
+                </div>
+
+                <div class="stat-number">
+                    248
+                </div>
+
+                <div class="stat-info">
+                    Alle geregistreerde kluisjes
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-name">
+                        In gebruik
+                    </span>
+
+                    <div class="stat-icon blue">
+                        ✓
+                    </div>
+
+                </div>
+
+                <div class="stat-number">
+                    192
+                </div>
+
+                <div class="stat-info">
+                    Kluisjes toegewezen aan leerlingen
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-name">
+                        Beschikbaar
+                    </span>
+
+                    <div class="stat-icon green">
+                        +
+                    </div>
+
+                </div>
+
+                <div class="stat-number">
+                    48
+                </div>
+
+                <div class="stat-info">
+                    Klaar om toe te wijzen
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-name">
+                        Onderhoud
+                    </span>
+
+                    <div class="stat-icon black">
+                        !
+                    </div>
+
+                </div>
+
+                <div class="stat-number">
+                    8
+                </div>
+
+                <div class="stat-info">
+                    Kluisjes met onderhoudsstatus
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             TABS
+        ====================================== -->
+
+        <div class="tabs">
+
+
+            <button
+                class="tab active"
+                onclick="showPanel('beheer', this)"
+            >
+                Beheer
+            </button>
+
+
+            <button
+                class="tab"
+                onclick="showPanel('gegevens', this)"
+            >
+                Gegevens
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =====================================
+             BEHEER
+        ====================================== -->
+
+        <section
+            id="beheerPanel"
+            class="panel"
+        >
+
+
+            <div class="panel-title">
+
+                <div>
+
+                    <h2>
+                        Beheer van kluisjes
+                    </h2>
+
+                    <p>
+                        Voer acties uit en beheer de kluisjes
+                        van leerlingen.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="management-grid">
+
+
+                <!-- OP AFSTAND -->
+
+                <div class="management-card">
+
+                    <div class="management-icon blue">
+                        ⚿
+                    </div>
+
+
+                    <div class="management-content">
+
+                        <h3>
+                            Kluisje op afstand besturen
+                        </h3>
+
+                        <p>
+                            Open of vergrendel een geselecteerd
+                            kluisje op afstand.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="manage-button"
+                        onclick="remoteLocker()"
+                    >
+                        Beheren
+                    </button>
+
+                </div>
+
+
+
+                <!-- TOEWIJZEN -->
+
+                <div class="management-card">
+
+                    <div class="management-icon purple">
+                        +
+                    </div>
+
+
+                    <div class="management-content">
+
+                        <h3>
+                            Kluisje toewijzen
+                        </h3>
+
+                        <p>
+                            Koppel een beschikbaar kluisje
+                            aan een leerling.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="manage-button"
+                        onclick="assignLocker()"
+                    >
+                        Toewijzen
+                    </button>
+
+                </div>
+
+
+
+                <!-- VERWISSELEN -->
+
+                <div class="management-card">
+
+                    <div class="management-icon green">
+                        ⇄
+                    </div>
+
+
+                    <div class="management-content">
+
+                        <h3>
+                            Kluisje verwisselen
+                        </h3>
+
+                        <p>
+                            Verander het toegewezen kluisje
+                            van een leerling.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="manage-button"
+                        onclick="switchLocker()"
+                    >
+                        Verwisselen
+                    </button>
+
+                </div>
+
+
+
+                <!-- VRIJGEVEN -->
+
+                <div class="management-card">
+
+                    <div class="management-icon black">
+                        −
+                    </div>
+
+
+                    <div class="management-content">
+
+                        <h3>
+                            Kluisje vrijgeven
+                        </h3>
+
+                        <p>
+                            Maak een gebruikt kluisje opnieuw
+                            beschikbaar.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="manage-button"
+                        onclick="releaseLocker()"
+                    >
+                        Vrijgeven
+                    </button>
+
+                </div>
+
+
+
+                <!-- ONDERHOUD -->
+
+                <div class="management-card">
+
+                    <div class="management-icon purple">
+                        !
+                    </div>
+
+
+                    <div class="management-content">
+
+                        <h3>
+                            Onderhoud & status
+                        </h3>
+
+                        <p>
+                            Bekijk defecten, onderhoud en
+                            technische status.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="manage-button"
+                        onclick="maintenance()"
+                    >
+                        Bekijken
+                    </button>
+
+                </div>
+
+
+
+                <!-- GESCHIEDENIS -->
+
+                <div class="management-card">
+
+                    <div class="management-icon blue">
+                        ↺
+                    </div>
+
+
+                    <div class="management-content">
+
+                        <h3>
+                            Geschiedenis
+                        </h3>
+
+                        <p>
+                            Bekijk eerdere toewijzingen,
+                            wisselingen en wijzigingen.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="manage-button"
+                        onclick="historyPage()"
+                    >
+                        Bekijken
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             GEGEVENS
+        ====================================== -->
+
+        <section
+            id="gegevensPanel"
+            class="panel"
+        >
+
+
+            <div class="panel-title">
+
+                <div>
+
+                    <h2>
+                        Kluisjes & leerlingen
+                    </h2>
+
+                    <p>
+                        Zoek en filter de gegevens van
+                        leerlingen en hun kluisjes.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FILTERS -->
+
+            <div class="filters">
+
+
+                <input
+                    id="searchInput"
+                    class="input"
+                    type="text"
+                    placeholder="Zoek op naam, K-nummer of kluisnummer..."
+                    onkeyup="filterTable()"
+                >
+
+
+                <select
+                    id="levelFilter"
+                    class="select"
+                    onchange="filterTable()"
+                >
+
+                    <option value="alle">
+                        Alle niveaus
+                    </option>
+
+                    <option value="VWO">
+                        VWO
+                    </option>
+
+                    <option value="HAVO">
+                        HAVO
+                    </option>
+
+                    <option value="MAVO">
+                        MAVO
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="statusFilter"
+                    class="select"
+                    onchange="filterTable()"
+                >
+
+                    <option value="alle">
+                        Alle statussen
+                    </option>
+
+                    <option value="In gebruik">
+                        In gebruik
+                    </option>
+
+                    <option value="Beschikbaar">
+                        Beschikbaar
+                    </option>
+
+                    <option value="Onderhoud">
+                        Onderhoud
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="buildingFilter"
+                    class="select"
+                    onchange="filterTable()"
+                >
+
+                    <option value="alle">
+                        Alle locaties
+                    </option>
+
+                    <option value="Begane grond">
+                        Begane grond
+                    </option>
+
+                    <option value="1e verdieping">
+                        1e verdieping
+                    </option>
+
+                    <option value="2e verdieping">
+                        2e verdieping
+                    </option>
+
+                </select>
+
+
+                <button
+                    class="search-button"
+                    onclick="filterTable()"
+                >
+                    Zoeken
+                </button>
+
+
+            </div>
+
+
+
+            <!-- TABEL -->
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                KLUIJSNR.
+                            </th>
+
+                            <th>
+                                LEERLING
+                            </th>
+
+                            <th>
+                                K-NUMMER
+                            </th>
+
+                            <th>
+                                NIVEAU
+                            </th>
+
+                            <th>
+                                LOCATIE
+                            </th>
+
+                            <th>
+                                STATUS
+                            </th>
+
+                            <th>
+                                ACTIE
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="lockerTable">
+
+
+                        <!-- RIJ 1 -->
+
+                        <tr
+                            data-level="VWO"
+                            data-status="In gebruik"
+                            data-location="Begane grond"
+                        >
+
+                            <td>
+                                <strong>K-101</strong>
+                            </td>
+
+                            <td class="student-name">
+                                Lisa de Vries
+                            </td>
+
+                            <td class="k-number">
+                                K123456
+                            </td>
+
+                            <td>
+                                <span class="level level-vwo">
+                                    VWO
+                                </span>
+                            </td>
+
+                            <td>
+                                Begane grond
+                            </td>
+
+                            <td>
+                                <span class="status occupied">
+                                    In gebruik
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="small-action"
+                                    onclick="viewLocker('K-101')"
+                                >
+                                    Bekijken
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- RIJ 2 -->
+
+                        <tr
+                            data-level="HAVO"
+                            data-status="In gebruik"
+                            data-location="1e verdieping"
+                        >
+
+                            <td>
+                                <strong>K-102</strong>
+                            </td>
+
+                            <td class="student-name">
+                                Noah Jansen
+                            </td>
+
+                            <td class="k-number">
+                                K234567
+                            </td>
+
+                            <td>
+                                <span class="level level-havo">
+                                    HAVO
+                                </span>
+                            </td>
+
+                            <td>
+                                1e verdieping
+                            </td>
+
+                            <td>
+                                <span class="status occupied">
+                                    In gebruik
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="small-action"
+                                    onclick="viewLocker('K-102')"
+                                >
+                                    Bekijken
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- RIJ 3 -->
+
+                        <tr
+                            data-level="MAVO"
+                            data-status="Beschikbaar"
+                            data-location="Begane grond"
+                        >
+
+                            <td>
+                                <strong>K-103</strong>
+                            </td>
+
+                            <td class="student-name">
+                                —
+                            </td>
+
+                            <td class="k-number">
+                                —
+                            </td>
+
+                            <td>
+                                <span class="level level-mavo">
+                                    MAVO
+                                </span>
+                            </td>
+
+                            <td>
+                                Begane grond
+                            </td>
+
+                            <td>
+                                <span class="status available">
+                                    Beschikbaar
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="small-action"
+                                    onclick="assignSpecificLocker('K-103')"
+                                >
+                                    Toewijzen
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- RIJ 4 -->
+
+                        <tr
+                            data-level="VWO"
+                            data-status="In gebruik"
+                            data-location="2e verdieping"
+                        >
+
+                            <td>
+                                <strong>K-104</strong>
+                            </td>
+
+                            <td class="student-name">
+                                Sophie Bakker
+                            </td>
+
+                            <td class="k-number">
+                                K345678
+                            </td>
+
+                            <td>
+                                <span class="level level-vwo">
+                                    VWO
+                                </span>
+                            </td>
+
+                            <td>
+                                2e verdieping
+                            </td>
+
+                            <td>
+                                <span class="status occupied">
+                                    In gebruik
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="small-action"
+                                    onclick="viewLocker('K-104')"
+                                >
+                                    Bekijken
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- RIJ 5 -->
+
+                        <tr
+                            data-level="HAVO"
+                            data-status="Onderhoud"
+                            data-location="1e verdieping"
+                        >
+
+                            <td>
+                                <strong>K-105</strong>
+                            </td>
+
+                            <td class="student-name">
+                                —
+                            </td>
+
+                            <td class="k-number">
+                                —
+                            </td>
+
+                            <td>
+                                <span class="level level-havo">
+                                    HAVO
+                                </span>
+                            </td>
+
+                            <td>
+                                1e verdieping
+                            </td>
+
+                            <td>
+                                <span class="status maintenance">
+                                    Onderhoud
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="small-action"
+                                    onclick="maintenanceLocker('K-105')"
+                                >
+                                    Bekijken
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- RIJ 6 -->
+
+                        <tr
+                            data-level="MAVO"
+                            data-status="In gebruik"
+                            data-location="2e verdieping"
+                        >
+
+                            <td>
+                                <strong>K-106</strong>
+                            </td>
+
+                            <td class="student-name">
+                                Milan Smit
+                            </td>
+
+                            <td class="k-number">
+                                K456789
+                            </td>
+
+                            <td>
+                                <span class="level level-mavo">
+                                    MAVO
+                                </span>
+                            </td>
+
+                            <td>
+                                2e verdieping
+                            </td>
+
+                            <td>
+                                <span class="status occupied">
+                                    In gebruik
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="small-action"
+                                    onclick="viewLocker('K-106')"
+                                >
+                                    Bekijken
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- RIJ 7 -->
+
+                        <tr
+                            data-level="VWO"
+                            data-status="Beschikbaar"
+                            data-location="Begane grond"
+                        >
+
+                            <td>
+                                <strong>K-107</strong>
+                            </td>
+
+                            <td class="student-name">
+                                —
+                            </td>
+
+                            <td class="k-number">
+                                —
+                            </td>
+
+                            <td>
+                                <span class="level level-vwo">
+                                    VWO
+                                </span>
+                            </td>
+
+                            <td>
+                                Begane grond
+                            </td>
+
+                            <td>
+                                <span class="status available">
+                                    Beschikbaar
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="small-action"
+                                    onclick="assignSpecificLocker('K-107')"
+                                >
+                                    Toewijzen
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+
+                    </tbody>
+
+                </table>
+
+
+                <div
+                    id="noResults"
+                    class="no-results"
+                >
+                    Geen kluisjes gevonden met deze filters.
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        Kluisjesbeheer · Schoolomgeving ·
+
+        <a href="instellingen.html">
+            Instellingen
+        </a>
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- =====================================
+     JAVASCRIPT
+====================================== -->
+
+<script>
+
+
+/* =====================================
+   TABBLADEN
+===================================== */
+
+function showPanel(panel, button) {
+
+    const beheer =
+        document.getElementById(
+            "beheerPanel"
+        );
+
+    const gegevens =
+        document.getElementById(
+            "gegevensPanel"
+        );
+
+    const tabs =
+        document.querySelectorAll(
+            ".tab"
+        );
+
+
+    tabs.forEach(function(tab) {
+
+        tab.classList.remove(
+            "active"
+        );
+
+    });
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    if (panel === "beheer") {
+
+        beheer.style.display =
+            "block";
+
+        gegevens.style.display =
+            "none";
+
+    }
+
+
+    if (panel === "gegevens") {
+
+        beheer.style.display =
+            "none";
+
+        gegevens.style.display =
+            "block";
+
+    }
+
+}
+
+
+/* =====================================
+   FILTERS
+===================================== */
+
+function filterTable() {
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+
+    const level =
+        document
+        .getElementById("levelFilter")
+        .value;
+
+
+    const status =
+        document
+        .getElementById("statusFilter")
+        .value;
+
+
+    const location =
+        document
+        .getElementById("buildingFilter")
+        .value;
+
+
+    const rows =
+        document.querySelectorAll(
+            "#lockerTable tr"
+        );
+
+
+    let visibleRows = 0;
+
+
+    rows.forEach(function(row) {
+
+        const text =
+            row.innerText.toLowerCase();
+
+
+        const rowLevel =
+            row.dataset.level;
+
+
+        const rowStatus =
+            row.dataset.status;
+
+
+        const rowLocation =
+            row.dataset.location;
+
+
+        const matchesSearch =
+            text.includes(search);
+
+
+        const matchesLevel =
+            level === "alle" ||
+            rowLevel === level;
+
+
+        const matchesStatus =
+            status === "alle" ||
+            rowStatus === status;
+
+
+        const matchesLocation =
+            location === "alle" ||
+            rowLocation === location;
+
+
+        if (
+            matchesSearch &&
+            matchesLevel &&
+            matchesStatus &&
+            matchesLocation
+        ) {
+
+            row.style.display =
+                "";
+
+            visibleRows++;
+
+        }
+
+        else {
+
+            row.style.display =
+                "none";
+
+        }
+
+    });
+
+
+    const noResults =
+        document.getElementById(
+            "noResults"
+        );
+
+
+    if (visibleRows === 0) {
+
+        noResults.style.display =
+            "block";
+
+    }
+
+    else {
+
+        noResults.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =====================================
+   BEHEER ACTIES
+===================================== */
+
+function remoteLocker() {
+
+    alert(
+        "Beheer op afstand\n\n" +
+        "Kies eerst een kluisje uit de gegevenslijst. " +
+        "Daar kun je het kluisje op afstand beheren."
+    );
+
+}
+
+
+function assignLocker() {
+
+    alert(
+        "Kluisje toewijzen\n\n" +
+        "Hier kan de beheerder een beschikbaar " +
+        "kluisje aan een leerling koppelen."
+    );
+
+}
+
+
+function switchLocker() {
+
+    alert(
+        "Kluisje verwisselen\n\n" +
+        "Hier kan een leerling van het ene " +
+        "kluisje naar een ander kluisje worden gezet."
+    );
+
+}
+
+
+function releaseLocker() {
+
+    alert(
+        "Kluisje vrijgeven\n\n" +
+        "Het geselecteerde kluisje kan hiermee " +
+        "weer beschikbaar worden gemaakt."
+    );
+
+}
+
+
+function maintenance() {
+
+    alert(
+        "Onderhoud & status\n\n" +
+        "Hier wordt de technische status van " +
+        "de kluisjes weergegeven."
+    );
+
+}
+
+
+function historyPage() {
+
+    alert(
+        "Geschiedenis\n\n" +
+        "Hier komt de geschiedenis van " +
+        "toewijzingen en wijzigingen."
+    );
+
+}
+
+
+/* =====================================
+   TABEL ACTIES
+===================================== */
+
+function viewLocker(locker) {
+
+    alert(
+        "Kluisje " +
+        locker +
+        "\n\n" +
+        "Hier kun je de volledige informatie " +
+        "over dit kluisje bekijken."
+    );
+
+}
+
+
+function assignSpecificLocker(locker) {
+
+    alert(
+        "Kluisje " +
+        locker +
+        "\n\n" +
+        "Dit kluisje is beschikbaar en kan " +
+        "aan een leerling worden toegewezen."
+    );
+
+}
+
+
+function maintenanceLocker(locker) {
+
+    alert(
+        "Kluisje " +
+        locker +
+        "\n\n" +
+        "Dit kluisje staat momenteel op " +
+        "onderhoud."
+    );
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

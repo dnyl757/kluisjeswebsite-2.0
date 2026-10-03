@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instellingen - Kluisjes</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f7f9fa;
+            color: #111820;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .page {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #ffffff 0%, #f7f9fa 100%);
+        }
+
+        /* HEADER */
+        header {
+            height: 64px;
+            background: #ffffff;
+            border-bottom: 1px solid #e6ebed;
+        }
+
+        .nav {
+            max-width: 1180px;
+            height: 64px;
+            margin: 0 auto;
+            padding: 0 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .brand-text {
+            color: #111820;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* LOGO */
+        .logo-locker {
+            width: 25px;
+            height: 30px;
+            border: 3px solid #111820;
+            border-radius: 4px;
+            position: relative;
+            background: #ffffff;
+            box-shadow: 4px 4px 0 #8C3074;
+        }
+
+        .logo-locker::before {
+            content: "";
+            position: absolute;
+            left: -3px;
+            top: -3px;
+            width: 25px;
+            height: 7px;
+            background: #3FA8BF;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .logo-locker::after {
+            content: "";
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #111820;
+            border-radius: 50%;
+            right: 4px;
+            top: 13px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            height: 64px;
+            display: flex;
+            align-items: center;
+
+            color: #68757b;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: #111820;
+        }
+
+        .nav-links a.active {
+            color: #8C3074;
+            border-bottom-color: #8C3074;
+        }
+
+        .login-btn {
+            background: #2db5c4;
+            color: white;
+            text-decoration: none;
+
+            padding: 9px 17px;
+            border-radius: 999px;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .login-btn:hover {
+            background: #3FA8BF;
+        }
+
+        /* MAIN */
+        main {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 35px 44px 55px;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            margin: 0 0 7px;
+            font-size: 29px;
+            letter-spacing: -0.5px;
+        }
+
+        .page-title p {
+            margin: 0;
+            font-size: 12px;
+            color: #68757b;
+        }
+
+        /* STAT CARDS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid #e5eaec;
+            border-radius: 11px;
+            padding: 18px;
+            box-shadow: 0 4px 14px rgba(17, 24, 32, 0.04);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #68757b;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .purple {
+            color: #8C3074;
+        }
+
+        .blue {
+            color: #3FA8BF;
+        }
+
+        .green {
+            color: #7c8b26;
+        }
+
+        .black {
+            color: #111820;
+        }
+
+        /* SETTINGS GRID */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .settings-panel {
+            background: #ffffff;
+            border: 1px solid #e5eaec;
+            border-radius: 13px;
+            box-shadow: 0 4px 14px rgba(17, 24, 32, 0.04);
+            overflow: hidden;
+        }
+
+        .settings-panel.full {
+            grid-column: 1 / -1;
+        }
+
+        .panel-header {
+            padding: 20px 21px 15px;
+            border-bottom: 1px solid #edf0f1;
+        }
+
+        .panel-header h2 {
+            margin: 0 0 5px;
+            font-size: 16px;
+        }
+
+        .panel-header p {
+            margin: 0;
+            font-size: 11px;
+            color: #68757b;
+            line-height: 1.5;
+        }
+
+        .setting-list {
+            padding: 5px 21px;
+        }
+
+        .setting {
+            min-height: 67px;
+            padding: 15px 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            border-bottom: 1px solid #edf0f1;
+        }
+
+        .setting:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-title {
+            margin-bottom: 4px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .setting-description {
+            font-size: 10px;
+            line-height: 1.5;
+            color: #68757b;
+        }
+
+        /* INPUTS */
+        .setting-control {
+            flex-shrink: 0;
+        }
+
+        select,
+        input[type="number"],
+        input[type="text"] {
+            min-width: 150px;
+            padding: 9px 11px;
+
+            border: 1px solid #dce3e6;
+            border-radius: 7px;
+            background: #ffffff;
+
+            color: #111820;
+            font-size: 11px;
+            outline: none;
+        }
+
+        select:focus,
+        input[type="number"]:focus,
+        input[type="text"]:focus {
+            border-color: #3FA8BF;
+            box-shadow: 0 0 0 3px rgba(63, 168, 191, 0.10);
+        }
+
+        /* TOGGLE */
+        .toggle {
+            width: 42px;
+            height: 23px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            cursor: pointer;
+
+            background: #d8dfe2;
+            border-radius: 30px;
+            transition: 0.2s;
+        }
+
+        .slider::before {
+            content: "";
+            position: absolute;
+
+            width: 17px;
+            height: 17px;
+
+            left: 3px;
+            top: 3px;
+
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+
+            transition: 0.2s;
+        }
+
+        .toggle input:checked + .slider {
+            background: #8C3074;
+        }
+
+        .toggle input:checked + .slider::before {
+            transform: translateX(19px);
+        }
+
+        /* BUTTONS */
+        .panel-footer {
+            padding: 15px 21px;
+            background: #fafbfb;
+            border-top: 1px solid #edf0f1;
+
+            display: flex;
+            justify-content: flex-end;
+            gap: 9px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 7px;
+            padding: 9px 15px;
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #8C3074;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #74265f;
+        }
+
+        .btn-blue {
+            background: #3FA8BF;
+            color: white;
+        }
+
+        .btn-blue:hover {
+            background: #328fa4;
+        }
+
+        .btn-light {
+            background: white;
+            color: #111820;
+            border: 1px solid #dce3e6;
+        }
+
+        .btn-light:hover {
+            background: #f5f7f8;
+        }
+
+        /* INFO BOX */
+        .info-box {
+            margin: 0 21px 20px;
+            padding: 13px 14px;
+
+            background: #f4f9fa;
+            border: 1px solid #dceff2;
+            border-radius: 8px;
+
+            font-size: 10px;
+            color: #526168;
+            line-height: 1.6;
+        }
+
+        .info-box strong {
+            color: #111820;
+        }
+
+        /* DANGER */
+        .danger-panel {
+            border-color: #ead8e5;
+        }
+
+        .danger-panel .panel-header {
+            background: #fcf8fb;
+        }
+
+        .danger-text {
+            color: #8C3074;
+        }
+
+        /* SAVE BAR */
+        .save-bar {
+            margin-top: 20px;
+            background: #111820;
+            border-radius: 11px;
+            padding: 15px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            color: white;
+        }
+
+        .save-text strong {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+
+        .save-text span {
+            font-size: 10px;
+            color: #b8c2c6;
+        }
+
+        .save-button {
+            border: none;
+            background: #3FA8BF;
+            color: white;
+
+            padding: 10px 18px;
+            border-radius: 7px;
+
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+            background: #2f94aa;
+        }
+
+        /* FOOTER */
+        footer {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 44px 28px;
+
+            color: #8a969b;
+            font-size: 10px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-panel.full {
+                grid-column: auto;
+            }
+
+            .nav-links {
+                gap: 14px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            main {
+                padding: 25px 20px 40px;
+            }
+
+            footer {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .setting {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .setting-control {
+                width: 100%;
+            }
+
+            select,
+            input[type="number"],
+            input[type="text"] {
+                width: 100%;
+            }
+
+            .save-bar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+    <header>
+        <nav class="nav">
+
+            <a href="home.html" class="brand">
+                <div class="logo-locker"></div>
+                <span class="brand-text">Kluisjes</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="kluisjes.html">Kluisjes</a>
+                <a href="meldingen.html">Meldingen</a>
+                <a href="instellingen.html" class="active">Instellingen</a>
+            </div>
+
+            <a href="inloggen.html" class="login-btn">Uitloggen</a>
+
+        </nav>
+    </header>
+
+
+    <!-- MAIN -->
+    <main>
+
+        <div class="page-title">
+            <h1>Instellingen</h1>
+            <p>Beheer de instellingen van de kluisjes en van het beheersysteem.</p>
+        </div>
+
+
+        <!-- STATS -->
+        <div class="stats">
+
+            <div class="stat-card">
+                <div class="stat-label">Kluisjes</div>
+                <div class="stat-value purple">250</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Automatische updates</div>
+                <div class="stat-value blue">Aan</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Meldingen</div>
+                <div class="stat-value green">Actief</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Laatste wijziging</div>
+                <div class="stat-value black">Vandaag</div>
+            </div>
+
+        </div>
+
+
+        <!-- SETTINGS -->
+        <div class="settings-grid">
+
+
+            <!-- KLUISET INSTELLINGEN -->
+            <section class="settings-panel">
+
+                <div class="panel-header">
+                    <h2>Kluisjes</h2>
+                    <p>Instellingen voor het gebruik en beheer van de schoolkluisjes.</p>
+                </div>
+
+                <div class="setting-list">
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Automatisch vergrendelen</div>
+                            <div class="setting-description">
+                                Kluisjes worden automatisch vergrendeld wanneer ze worden gesloten.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Automatische updates</div>
+                            <div class="setting-description">
+                                Werk de status van kluisjes automatisch bij wanneer er iets verandert.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Standaard gebruiksperiode</div>
+                            <div class="setting-description">
+                                De standaardperiode waarvoor een leerling een kluisje krijgt.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <select>
+                                <option>1 schooljaar</option>
+                                <option>1 semester</option>
+                                <option>Half schooljaar</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Open kluisje detecteren</div>
+                            <div class="setting-description">
+                                Geef een melding wanneer een kluisje te lang open blijft staan.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <select>
+                                <option>10 minuten</option>
+                                <option>15 minuten</option>
+                                <option>20 minuten</option>
+                                <option>30 minuten</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Schoonmaakcontrole</div>
+                            <div class="setting-description">
+                                Laat schoonmakers na een controle aangeven of een kluisje schoon en toegankelijk is.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- MELDINGEN -->
+            <section class="settings-panel">
+
+                <div class="panel-header">
+                    <h2>Meldingen</h2>
+                    <p>Bepaal wanneer het systeem een melding moet geven aan de beheerder.</p>
+                </div>
+
+                <div class="setting-list">
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Storing melden</div>
+                            <div class="setting-description">
+                                Ontvang een melding wanneer een elektronisch slot niet goed werkt.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Lage batterij</div>
+                            <div class="setting-description">
+                                Waarschuw de beheerder wanneer de batterij van een elektronisch slot bijna leeg is.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Schoonmaakmeldingen</div>
+                            <div class="setting-description">
+                                Toon een melding wanneer een schoonmaakcontrole is uitgevoerd of nog moet gebeuren.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Dagelijks overzicht</div>
+                            <div class="setting-description">
+                                Toon iedere ochtend een overzicht met belangrijke meldingen en openstaande problemen.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Meldingen bewaren</div>
+                            <div class="setting-description">
+                                Bewaar opgeloste meldingen zodat ze later terug te vinden zijn in de geschiedenis.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <select>
+                                <option>12 maanden</option>
+                                <option>2 jaar</option>
+                                <option>3 jaar</option>
+                                <option>Onbeperkt</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- WEBSITE -->
+            <section class="settings-panel">
+
+                <div class="panel-header">
+                    <h2>Website</h2>
+                    <p>Pas de werking en weergave van het beheersysteem aan.</p>
+                </div>
+
+                <div class="setting-list">
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Automatisch vernieuwen</div>
+                            <div class="setting-description">
+                                Vernieuw de informatie op de website automatisch zodat de gegevens actueel blijven.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Vernieuwingsinterval</div>
+                            <div class="setting-description">
+                                Bepaal hoe vaak nieuwe gegevens worden opgehaald.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <select>
+                                <option>30 seconden</option>
+                                <option>1 minuut</option>
+                                <option>5 minuten</option>
+                                <option>10 minuten</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Startpagina</div>
+                            <div class="setting-description">
+                                Kies welke pagina na het inloggen als eerste wordt geopend.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <select>
+                                <option>Home</option>
+                                <option>Kluisjes</option>
+                                <option>Meldingen</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Aantal regels per pagina</div>
+                            <div class="setting-description">
+                                Bepaal hoeveel kluisjes tegelijk in de tabellen worden weergegeven.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <select>
+                                <option>10</option>
+                                <option selected>25</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Compacte weergave</div>
+                            <div class="setting-description">
+                                Gebruik een compactere indeling zodat meer informatie op het scherm past.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- BEVEILIGING -->
+            <section class="settings-panel">
+
+                <div class="panel-header">
+                    <h2>Beveiliging</h2>
+                    <p>Instellingen voor toegang tot het kluisjessysteem en gevoelige gegevens.</p>
+                </div>
+
+                <div class="setting-list">
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Automatisch uitloggen</div>
+                            <div class="setting-description">
+                                Log een gebruiker automatisch uit wanneer de website langere tijd niet wordt gebruikt.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <select>
+                                <option>15 minuten</option>
+                                <option>30 minuten</option>
+                                <option>1 uur</option>
+                                <option>4 uur</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Wijzigingen bijhouden</div>
+                            <div class="setting-description">
+                                Bewaar wie een kluisje of instelling heeft gewijzigd en wanneer dit gebeurde.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Noodopeningen registreren</div>
+                            <div class="setting-description">
+                                Leg iedere noodopening van een kluisje vast in de geschiedenis.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Beheerrechten</div>
+                            <div class="setting-description">
+                                Alleen medewerkers met beheerrechten kunnen belangrijke instellingen aanpassen.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="info-box">
+                    <strong>Beveiliging:</strong>
+                    wijzigingen aan kluisjes, gebruikers en belangrijke instellingen worden opgeslagen in de
+                    geschiedenis. Zo kan de beheerder altijd terugzien wat er is aangepast.
+                </div>
+
+            </section>
+
+
+            <!-- SYSTEEM -->
+            <section class="settings-panel full">
+
+                <div class="panel-header">
+                    <h2>Systeem en onderhoud</h2>
+                    <p>Algemene instellingen voor het onderhoud en de werking van het kluisjessysteem.</p>
+                </div>
+
+                <div class="setting-list">
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Onderhoudscontrole</div>
+                            <div class="setting-description">
+                                Plan regelmatig een controle van alle elektronische kluisjes.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <select>
+                                <option>Elke maand</option>
+                                <option>Elke 2 maanden</option>
+                                <option>Elk kwartaal</option>
+                                <option>Halfjaarlijks</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Geschiedenis bewaren</div>
+                            <div class="setting-description">
+                                Bepaal hoelang informatie over openingen, storingen, controles en wijzigingen wordt bewaard.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <select>
+                                <option>1 jaar</option>
+                                <option>2 jaar</option>
+                                <option>5 jaar</option>
+                                <option>Onbeperkt</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting">
+                        <div class="setting-info">
+                            <div class="setting-title">Systeemstatus controleren</div>
+                            <div class="setting-description">
+                                Controleer automatisch of alle onderdelen van het kluisjessysteem bereikbaar zijn.
+                            </div>
+                        </div>
+
+                        <div class="setting-control">
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel-footer">
+                    <button class="btn btn-light" onclick="resetSettings()">Standaardinstellingen</button>
+                    <button class="btn btn-blue" onclick="checkSystem()">Systeem controleren</button>
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- SAVE BAR -->
+        <div class="save-bar">
+
+            <div class="save-text">
+                <strong>Instellingen opslaan</strong>
+                <span>Controleer je wijzigingen voordat je de instellingen opslaat.</span>
+            </div>
+
+            <button class="save-button" onclick="saveSettings()">
+                Wijzigingen opslaan
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+        Informatica Kluisjes Prototype · Danyal de Jong VWO 5
+    </footer>
+
+</div>
+
+
+<script>
+
+    function saveSettings() {
+        alert("De instellingen zijn opgeslagen.");
+    }
+
+    function resetSettings() {
+        const bevestiging = confirm(
+            "Weet je zeker dat je de instellingen wilt terugzetten naar de standaardinstellingen?"
+        );
+
+        if (bevestiging) {
+            alert("De standaardinstellingen zijn hersteld.");
+        }
+    }
+
+    function checkSystem() {
+        alert(
+            "Systeemcontrole uitgevoerd.\n\nAlle onderdelen van het kluisjessysteem zijn bereikbaar."
+        );
+    }
+
+</script>
+
+</body>
+</html>
+```
